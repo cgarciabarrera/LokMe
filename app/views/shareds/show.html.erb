@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Device:</strong>
+  <%= @shared.device_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @shared.user_id %>
+</p>
+
+<p>
+  <strong>User shared:</strong>
+  <%= @shared.user_shared %>
+</p>
+
+<p>
+  <strong>From date:</strong>
+  <%= @shared.from_date %>
+</p>
+
+<p>
+  <strong>To date:</strong>
+  <%= @shared.to_date %>
+</p>
+
+<p>
+  <strong>Visibility:</strong>
+  <%= @shared.visibility %>
+</p>
+
+<%= link_to 'Edit', edit_shared_path(@shared) %> |
+<%= link_to 'Back', shareds_path %>

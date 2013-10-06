@@ -1,0 +1,37 @@
+<h1>Listing shareds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Device</th>
+      <th>User</th>
+      <th>User shared</th>
+      <th>From date</th>
+      <th>To date</th>
+      <th>Visibility</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shareds.each do |shared| %>
+      <tr>
+        <td><%= shared.device_id %></td>
+        <td><%= shared.user_id %></td>
+        <td><%= shared.user_shared %></td>
+        <td><%= shared.from_date %></td>
+        <td><%= shared.to_date %></td>
+        <td><%= shared.visibility %></td>
+        <td><%= link_to 'Show', shared %></td>
+        <td><%= link_to 'Edit', edit_shared_path(shared) %></td>
+        <td><%= link_to 'Destroy', shared, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shared', new_shared_path %>

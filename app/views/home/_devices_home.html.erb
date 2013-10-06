@@ -1,0 +1,70 @@
+
+<% @devices.each do |device| %>
+    <br>
+    <% if @propio==0 %>
+        Dispositivo compartivo por:
+        <%=  User.find(device.user_id).name %><br>
+    <% end %>
+
+    <%= device.name + " (" + device.imei.to_s + ")" %>
+    <% if @propio==1 %>
+    <%= link_to 'Change name', edit_device_path(device) %> <%= link_to("Delete device", device_path(device), :data => { :confirm => "Are you sure?" }, :method => :delete)  %></td> </td>
+    <% end %>
+    <%
+       if params[:m].present?
+         @puntos = Point.where('device_id=?',device.id).where('created_at >= ?',params[:m].to_f.minutes.ago).order("created_at desc")
+       else
+
+         @puntos = Point.where('device_id=?',device.id).where('created_at >= ?',120.minutes.ago).order("created_at desc")
+
+       end
+       if !@puntos.first.present?
+         @puntos = Point.where('device_id=?',device.id).limit(1)
+       end
+       @PuntosCada = @puntos.map { |i| [i[:latitude], i[:longitude]] }
+
+       a=Polylines::Encoder.encode_points(@PuntosCada)
+
+    %>
+
+    <br>
+
+    <% if @puntos.first.present? %>
+
+        First point:<br>
+        <%= Time.at(@puntos.last.created_at)%>
+
+
+        <br>
+        Last point:<br>
+        <%= Time.at(@puntos.first.created_at)%>
+        <br>
+        <%= "(" + time_ago_in_words(Time.at(@puntos.first.created_at)) + " ago)"%>
+
+        <br>
+        <br>
+        <% if @propio ==1 %>
+
+
+            <% @cmp = Shared.where("device_id = ?",device.id.to_s)
+               if @cmp.first.present? %>
+                Lista de compartidos<br>
+                <%
+                  @cmp.each do |c| %>
+                    <%= User.find(c.user_shared).name %><br>
+                  <% end
+               end
+               %>
+            Agregar nuevo usuario <br>
+        <% end %>
+        <%= link_to 'details', device %> <br>
+
+
+        <img src="http://maps.googleapis.com/maps/api/staticmap?sensor=true&size=250x250&markers=color:blue%7Clabel:S%7C<%= @puntos.first.latitude.to_s %>,<%= @puntos.first.longitude.to_s%>&path=weight:3%7Ccolor:0x0000ff%7Cenc:<%=a%>">
+    <% else %>
+        No hay puntos aun
+    <% end %>
+
+    <br><br>*********************************************
+    <br>
+<% end %>
