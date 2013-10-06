@@ -1,19 +1,65 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Imei:</strong>
-  <%= @device.imei %>
-</p>
-
-<p>
   <strong>Name:</strong>
-  <%= @device.name %>
+  <%= @device.name + " (" + @device.imei.to_s + ")" %>
 </p>
 
-<p>
-  <strong>Last seen:</strong>
-  <%= @device.last_seen %>
-</p>
+<%
+   if params[:m].present?
+     @puntos = Point.where('device_id=?',@device.id).where('created_at >= ?',params[:m].to_f.minutes.ago).order("created_at desc")
+   else
 
-<%= link_to 'Edit', edit_device_path(@device) %> |
-<%= link_to 'Back', devices_path %>
+     #@puntos = GpsPoint.ultimas2h.where('device_id=?',@device.id)
+     @puntos = Point.where('device_id=?',@device.id).where('created_at >= ?',120.minutes.ago).order("created_at desc")
+
+   end
+   if !@puntos.first.present?
+     @puntos = Point.where('device_id=?',@device.id).order("created_at desc").limit(1)
+   end
+   @PuntosCada = @puntos.map { |i| [i[:latitude], i[:longitude]] }
+
+   a=Polylines::Encoder.encode_points(@PuntosCada)
+
+%>
+
+<% if @puntos.first.present? %>
+First point:<br>
+<%= Time.at(@puntos.last.created_at)%>
+
+
+<br>
+Last point:<br>
+<%= Time.at(@puntos.first.created_at)%>
+<br>
+<%= "(" + time_ago_in_words(Time.at(@puntos.first.created_at)) + " ago)"%>
+
+<br>
+<%= link_to 'last 40 hours', device_path(@device, :m=>2400) %>
+<br>
+<%= link_to 'last day', device_path(@device, :m=>1440) %>
+<br>
+<%= link_to 'last 12 hours', device_path(@device, :m=>720) %>
+<br>
+<%= link_to 'last 4 hours', device_path(@device, :m=>240) %>
+<br>
+<%= link_to 'last 2 hours', device_path(@device, :m=>120) %>
+<br>
+<%= link_to 'last hour', device_path(@device, :m=>60) %>
+<br>
+<%= link_to 'last 30 min', device_path(@device, :m=>30) %>
+<br>
+<%= link_to 'last 10 min', device_path(@device, :m=>10) %>
+<br>
+<%= link_to 'last known point', device_path(@device, :m=>0) %>
+<br>   <br>
+<%= link_to 'Back', root_path%>
+<br><br>
+<img src="http://maps.googleapis.com/maps/api/staticmap?sensor=true&size=640x640&markers=color:blue%7Clabel:S%7C<%= @puntos.first.latitude.to_s %>,<%= @puntos.first.longitude.to_s%>&path=weight:3%7Ccolor:0x0000ff%7Cenc:<%=a%>">
+<% else %>
+Aun no hay puntos
+    <br>
+    <%= link_to 'Back', root_path%>
+<% end %>
+
+

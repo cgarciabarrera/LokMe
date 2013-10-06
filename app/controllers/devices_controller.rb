@@ -4,7 +4,7 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.all
+    redirect_to root_path
   end
 
   # GET /devices/1
@@ -12,6 +12,43 @@ class DevicesController < ApplicationController
   def show
   end
 
+  def verify
+    imei=params[:imei]
+
+    d= Device.where('imei= ?',params[:imei]).first
+    if d.nil?
+      #no existe aun
+      a=Device.new
+      a.imei=imei
+      a.name=""
+      a.user_id =current_user.id
+      a.save
+      flash[:notice] = "Ahora el IMEI " + imei + " está asociado a tu cuenta. No hay datos de ese dispositivo."
+      redirect_to root_path
+
+    else
+      if d.user_id.nil?
+        d.user_id=current_user.id
+        d.save
+
+        flash[:notice] = "Ahora el IMEI " + imei + " está asociado a tu cuenta"
+        redirect_to root_path
+
+      else
+        #d= Device.where('imei= ?',params[:imei]).first
+        if d.user_id==current_user.id
+          flash[:notice] ="Ese IMEI ya estaba asociado a tu cuenta"
+          redirect_to root_path
+        else
+          flash[:notice] = "Ese IMEI pertenece a otro usuario"
+          redirect_to root_path
+        end
+      end
+      #si existe
+    end
+
+
+  end
   # GET /devices/new
   def new
     @device = Device.new
@@ -21,6 +58,9 @@ class DevicesController < ApplicationController
   def edit
   end
 
+
+  def assign
+  end
   # POST /devices
   # POST /devices.json
   def create

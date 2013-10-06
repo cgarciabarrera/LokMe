@@ -7,6 +7,57 @@ class PointsController < ApplicationController
     @points = Point.all
   end
 
+
+  def manual
+    latitude=params[:latitude]
+    longitude=params[:longitude]
+    accuracy = params[:accuracy]
+    provider = params[:provider]
+    timestamp= params[:timestamp]
+
+    imei=params[:imei]
+
+    pointnew = Point.new
+    pointnew.latitude=latitude
+    pointnew.longitude=longitude
+    pointnew.accuracy=accuracy
+    pointnew.provider=provider
+
+
+    id_device=0
+    b = Device.find_by_imei(params[:imei])
+    if b.present?
+      id_device = b.id
+    else
+      a=Device.new
+      a.imei=params[:imei]
+      a.name=''
+      if a.valid?
+        a.save
+      else
+        render :json => 'KO'
+
+        return false
+      end
+      a.save
+      id_device = a.id
+
+    end
+
+    pointnew.device_id = id_device
+
+
+    if pointnew.valid?
+      pointnew.save
+      render :json =>  'OK'
+    else
+      render :json => 'KO'
+    end
+
+  end
+
+
+
   # GET /points/1
   # GET /points/1.json
   def show

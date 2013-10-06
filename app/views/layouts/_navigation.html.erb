@@ -2,7 +2,9 @@
 <ul class="nav">
   <% if user_signed_in? %>
     <li>
-    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+      <%= "Connected as " + current_user.name %>
+
+      <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
     </li>
   <% else %>
     <li>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131006142338) do
+ActiveRecord::Schema.define(version: 20131006144942) do
 
   create_table "devices", force: true do |t|
     t.string   "imei"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20131006142338) do
     t.datetime "last_seen"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "points", force: true do |t|
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131006142338) do
     t.datetime "timefix"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "device_id"
   end
 
   create_table "roles", force: true do |t|

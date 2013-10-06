@@ -12,6 +12,9 @@ gem 'devise'
 gem 'figaro'
 gem 'mysql2'
 gem 'rolify'
+gem 'polylines'
+gem 'thin'
+
 group :assets do
   gem 'therubyracer', :platform=>:ruby
 end

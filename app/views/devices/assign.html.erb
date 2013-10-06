@@ -1,0 +1,10 @@
+<h1>Assign new device to <%= current_user.name %></h1>
+
+<%= form_tag "/devices/verify" do %>
+    Insert IMEI here
+    <%= text_field_tag "imei", "" %>
+    <%= submit_tag "Add this device" %>
+<% end %>
+
+
+<%= link_to 'Cancel', root_path%>
