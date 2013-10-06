@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @point.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @point.longitude %>
+</p>
+
+<p>
+  <strong>Speed:</strong>
+  <%= @point.speed %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @point.height %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @point.course %>
+</p>
+
+<p>
+  <strong>Accuracy:</strong>
+  <%= @point.accuracy %>
+</p>
+
+<p>
+  <strong>Provider:</strong>
+  <%= @point.provider %>
+</p>
+
+<p>
+  <strong>Timefix:</strong>
+  <%= @point.timefix %>
+</p>
+
+<%= link_to 'Edit', edit_point_path(@point) %> |
+<%= link_to 'Back', points_path %>

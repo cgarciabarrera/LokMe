@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131006142125) do
+ActiveRecord::Schema.define(version: 20131006142338) do
+
+  create_table "devices", force: true do |t|
+    t.string   "imei"
+    t.string   "name"
+    t.datetime "last_seen"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "points", force: true do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.float    "speed"
+    t.float    "height"
+    t.float    "course"
+    t.float    "accuracy"
+    t.string   "provider"
+    t.datetime "timefix"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"
