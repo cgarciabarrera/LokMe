@@ -15,6 +15,8 @@ gem 'rolify'
 gem 'polylines'
 gem 'thin'
 
+gem 'pg'
+
 group :assets do
   gem 'therubyracer', :platform=>:ruby
 end

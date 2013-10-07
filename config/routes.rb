@@ -13,6 +13,8 @@ LokMe::Application.routes.draw do
       get :assign
       post :assign
       post :verify
+      get :stopsharing
+      post :share
     end
 
   end

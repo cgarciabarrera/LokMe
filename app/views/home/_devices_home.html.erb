@@ -41,7 +41,10 @@
         <br>
         <%= "(" + time_ago_in_words(Time.at(@puntos.first.created_at)) + " ago)"%>
 
+        <br><br>
+        <%= link_to 'details', device %> <br>
         <br>
+        <img src="http://maps.googleapis.com/maps/api/staticmap?sensor=true&size=250x250&markers=color:blue%7Clabel:S%7C<%= @puntos.first.latitude.to_s %>,<%= @puntos.first.longitude.to_s%>&path=weight:3%7Ccolor:0x0000ff%7Cenc:<%=a%>">
         <br>
         <% if @propio ==1 %>
 
@@ -51,16 +54,23 @@
                 Lista de compartidos<br>
                 <%
                   @cmp.each do |c| %>
-                    <%= User.find(c.user_shared).name %><br>
+                    <%= User.find(c.user_shared).name %> <%= link_to "Dejar de compartir", "devices/stopsharing?device_id=" + c.device_id.to_s + "&user_shared=" + c.user_shared.to_s  %> <br>
                   <% end
                end
                %>
-            Agregar nuevo usuario <br>
+            <br>
+            Compartir con otro usuario <br>
+            <%= form_tag "/devices/share" do %>
+                <%= text_field_tag "email", "" %>
+                <%= hidden_field_tag 'device', device.id %>
+                <%= submit_tag "Share !" %>
+            <% end %>
+
         <% end %>
-        <%= link_to 'details', device %> <br>
 
 
-        <img src="http://maps.googleapis.com/maps/api/staticmap?sensor=true&size=250x250&markers=color:blue%7Clabel:S%7C<%= @puntos.first.latitude.to_s %>,<%= @puntos.first.longitude.to_s%>&path=weight:3%7Ccolor:0x0000ff%7Cenc:<%=a%>">
+
+
     <% else %>
         No hay puntos aun
     <% end %>

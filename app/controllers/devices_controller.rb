@@ -12,6 +12,61 @@ class DevicesController < ApplicationController
   def show
   end
 
+
+  def stopsharing
+    if params[:device_id].present? && params[:user_shared].present?
+      @device = Device.where("id = ?", params[:device_id])
+      @user = User.where("id = ?", params[:user_shared])
+      if @device.first.present?
+        if @device.first.user_id==current_user.id
+          # el device es del usuario
+          if @user.first.present?
+            # camino normal por el que deberia ir
+            Shared.where("device_id = ?",@device.first.id).where("user_shared = ?", @user.first.id).destroy_all
+            flash[:notice] ="Ya no comparte " + @device.first.name + "(" + @device.first.imei + ") con " + @user.first.name
+
+          else
+            flash[:notice] ="El usuario no existe"
+
+          end
+        else
+          flash[:notice] ="El dispositivo no es accesible"
+
+        end
+      else
+        flash[:notice] ="El dispositivo no es accesible"
+
+      end
+    end
+
+
+    redirect_to root_path
+  end
+
+  def share
+      #localizar que existe el email enun usuario
+      u=User.where("email = ?", params[:email])
+
+
+      if u.first.present?
+        a=Shared.new
+        a.device_id=params[:device]
+        a.user_id =current_user.id
+        a.user_shared = u.first.id
+        if a.valid?
+          a.save
+          flash[:notice] = "Ahora compartes el dispositivo con " + u.first.name
+        else
+          flash[:notice] = "No existe un usuario con ese e-mail"
+        end
+      else
+        flash[:notice] = "No existe un usuario con ese e-mail"
+      end
+
+      redirect_to root_path
+
+  end
+
   def verify
     imei=params[:imei]
 

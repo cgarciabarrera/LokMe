@@ -1,6 +1,8 @@
 class PointsController < ApplicationController
   before_action :set_point, only: [:show, :edit, :update, :destroy]
 
+  skip_before_filter :verify_authenticity_token, :only => [:manual]
+
   # GET /points
   # GET /points.json
   def index
