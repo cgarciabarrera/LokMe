@@ -16,6 +16,7 @@ gem 'polylines'
 gem 'thin'
 
 gem 'pg'
+gem 'rails_12factor'
 
 group :assets do
   gem 'therubyracer', :platform=>:ruby
