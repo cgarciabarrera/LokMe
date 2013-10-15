@@ -1,6 +1,6 @@
 class PointsController < ApplicationController
   before_action :set_point, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   skip_before_filter :verify_authenticity_token, :only => [:manual]
 
   # GET /points
@@ -16,14 +16,23 @@ class PointsController < ApplicationController
     accuracy = params[:accuracy]
     provider = params[:provider]
     timestamp= params[:timestamp]
+    speed = params[:speed]
+    height = params[:height]
+    course = params[:course]
 
-    imei=params[:imei]
+
+    #imei=params[:imei]
 
     pointnew = Point.new
     pointnew.latitude=latitude
     pointnew.longitude=longitude
     pointnew.accuracy=accuracy
     pointnew.provider=provider
+    pointnew.speed = speed
+    pointnew.height=height
+    pointnew.course=course
+
+
 
 
     id_device=0
