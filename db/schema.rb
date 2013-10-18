@@ -15,12 +15,11 @@ ActiveRecord::Schema.define(version: 20131013204843) do
 
   create_table "devices", force: true do |t|
     t.string   "imei"
-    t.string   "name",                 default: ""
+    t.string   "name",       default: ""
     t.datetime "last_seen"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "authentication_token"
   end
 
   create_table "points", force: true do |t|
