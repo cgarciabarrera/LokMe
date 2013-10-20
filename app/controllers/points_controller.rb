@@ -1,6 +1,6 @@
 class PointsController < ApplicationController
   before_action :set_point, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except =>  [:manual]
   skip_before_filter :verify_authenticity_token, :only => [:manual]
 
   # GET /points
