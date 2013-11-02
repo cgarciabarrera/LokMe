@@ -1,42 +1,41 @@
 
 
+
+
+
+
 <% if user_signed_in? %>
 
-    <h3>My devices</h3>
-    <%= link_to "Add new device", :controller => :devices, :action => :assign %>
-         <br>
-    <% unless @devices.nil?
-         @propio =1
-    %>
-
-
-    <%= render 'devices_home' %>
-
-    <% end %>
-
-    <% # pintamos los shared del usuario si los hay %>
-
-    <h4>Posiciones compartidas por otros</h4>
-    <% @sh=Shared.where("user_shared = ?",current_user.id.to_s) %>
 
 
 
-    <% if @sh.first.present? %>
+    <h1>Listing characters</h1>
 
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Gmaps</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
 
-    <% @sh.each do |s|
-         @devices = Device.where("id = ?", s.device_id.to_s)
-         @propio =0 %>
+      <% @devices.each do |character| %>
+          <tr>
+            <td><%= character.imei %></td>
+            <td><%= character.name %></td>
+            <td><%= character.longitude %></td>
+            <td><%= character.latitude %></td>
+            <td><%= character.gmaps %></td>
 
-         <%= render 'devices_home' %>
-       <% end %>
-    <% end %>
+          </tr>
+      <% end %>
+    </table>
 
-
-    <br>
-<% else %>
-    <h3>My devices</h3>
+    <br />
+<%= link_to 'New Device', new_device_path %>
+<%= gmaps4rails(@json) %>
 <% end %>
-
-
-

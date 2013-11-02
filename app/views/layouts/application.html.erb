@@ -5,6 +5,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Lokme" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Lokme" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag 'gmaps4rails' %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
@@ -17,6 +18,7 @@
       </header>
       <div id="main" role="main">
         <%= yield %>
+        <%= yield :scripts %>
       </div>
       <footer>
       </footer>

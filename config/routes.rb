@@ -1,6 +1,8 @@
 LokMe::Application.routes.draw do
   resources :shareds
 
+
+
   resources :points do
 
     collection do

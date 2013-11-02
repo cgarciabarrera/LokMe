@@ -1,0 +1,43 @@
+
+
+
+
+
+
+<% if user_signed_in? %>
+
+    <h3>My devices</h3>
+    <%= link_to "Add new device", :controller => :devices, :action => :assign %>
+    <br>
+    <% unless @devices.nil?
+         @propio =1
+    %>
+
+
+        <%= render 'devices_home' %>
+
+    <% end %>
+
+    <% # pintamos los shared del usuario si los hay %>
+
+    <h4>Posiciones compartidas por otros</h4>
+    <% @sh=Shared.where("user_shared = ?",current_user.id.to_s) %>
+
+
+
+    <% if @sh.first.present? %>
+
+
+        <% @sh.each do |s|
+          @devices = Device.where("id = ?", s.device_id.to_s)
+          @propio =0 %>
+
+            <%= render 'devices_home' %>
+        <% end %>
+    <% end %>
+
+
+    <br>
+<% else %>
+    <h3>My devices</h3>
+<% end %>
