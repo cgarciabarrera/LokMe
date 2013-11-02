@@ -20,7 +20,11 @@ class Device < ActiveRecord::Base
 
 
   def gmaps4rails_infowindow
-    "<h1>#{imei}</h1>"
+    if self.name.present?
+      "<h1>#{name}</h1>"
+    else
+      "<h1>#{imei}</h1>"
+      end
   end
 
   def gmaps4rails_address
