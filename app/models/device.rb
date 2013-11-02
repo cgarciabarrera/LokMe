@@ -21,14 +21,16 @@ class Device < ActiveRecord::Base
 
   def gmaps4rails_infowindow
     if self.name.present?
-      "<h1>#{name}</h1>"
+      "<h3>#{name}</h3>" + "<p>" + self.user.name + "</p>"
+
     else
-      "<h1>#{imei}</h1>"
+      "<h3>#{imei}</h3>"
       end
   end
 
   def gmaps4rails_address
     "madrid"
   end
+
 
 end
