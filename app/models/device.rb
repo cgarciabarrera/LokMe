@@ -24,7 +24,7 @@ class Device < ActiveRecord::Base
       "<h3>#{name}</h3>" + "<p>" + self.user.name + "</p>"
 
     else
-      "<h3>#{imei}</h3>"
+      "<h3>#{imei}</h3>" + "<p>" + self.user.name + "</p>"
       end
   end
 

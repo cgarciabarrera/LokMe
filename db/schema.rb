@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131102111548) do
+ActiveRecord::Schema.define(version: 20131104222835) do
 
   create_table "devices", force: true do |t|
     t.string   "imei"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 20131102111548) do
     t.integer  "user_id"
     t.boolean  "gmaps"
   end
+
+  add_index "devices", ["imei"], name: "index_devices_on_imei", using: :btree
+  add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "points", force: true do |t|
     t.float    "latitude"
@@ -36,6 +39,8 @@ ActiveRecord::Schema.define(version: 20131102111548) do
     t.datetime "updated_at"
     t.integer  "device_id"
   end
+
+  add_index "points", ["device_id"], name: "index_points_on_device_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
