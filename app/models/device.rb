@@ -9,12 +9,12 @@ class Device < ActiveRecord::Base
   #attr_accessible :gmaps, :latitude, :longitude, :imei
 
   def latitude
-    self.points.last.latitude
+    self.points.last.latitude if self.points.last.present?
 
   end
 
   def longitude
-    self.points.last.longitude
+    self.points.last.longitude if self.points.last.present?
 
   end
 
