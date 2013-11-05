@@ -18,14 +18,19 @@ class Device < ActiveRecord::Base
 
   end
 
+  def accuracy
+    self.points.last.accuracy if self.points.last.present?
+
+  end
+
 
   def gmaps4rails_infowindow
     if self.name.present?
-      "<h3>#{name}</h3>" + "<p>" + self.user.name + "</p>"
+      "<h3>#{name}</h3>" + "<p>" + self.user.name.to_s + " " + self.accuracy.to_s + " metros</p>"
 
     else
-      "<h3>#{imei}</h3>" + "<p>" + self.user.name + "</p>"
-      end
+      "<h3>#{imei}</h3>" + "<p>" + self.user.name.to_s + " " + self.accuracy.to_s + " metros</p>"
+    end
   end
 
   def gmaps4rails_address

@@ -37,7 +37,15 @@
 
     <br />
 
-<%= gmaps4rails(@json) %>
+<%#= gmaps4rails(@json) %>
+
+    <%= gmaps(
+                {
+                        "markers"     => { "data" => @json },
+
+                        "circles"     => { "data" => @jsonCirculos },
+                }
+        ) %>
 <% end %>
 
 
