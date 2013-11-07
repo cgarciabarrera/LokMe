@@ -1,6 +1,9 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
 
+  skip_before_filter :verify_authenticity_token, :only => [:cuantos, :listamisdevices]
+
+
   # GET /devices
   # GET /devices.json
   def index
@@ -156,6 +159,22 @@ class DevicesController < ApplicationController
     end
   end
 
+  def cuantos
+      respond_to do |format|
+        format.json { render json: {:cuantos=>current_user.devices.count} }
+
+      end
+
+  end
+
+  def listamisdevices
+    respond_to do |format|
+      format.json { render json: {:lista=>current_user.devices, :nombre=>current_user.name} }
+
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_device
@@ -166,4 +185,6 @@ class DevicesController < ApplicationController
     def device_params
       params.require(:device).permit(:imei, :name, :last_seen)
     end
+
+
 end

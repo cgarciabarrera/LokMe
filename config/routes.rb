@@ -17,6 +17,9 @@ LokMe::Application.routes.draw do
       post :verify
       get :stopsharing
       post :share
+      post :cuantos
+      post :listamisdevices
+
     end
 
   end
