@@ -23,7 +23,7 @@
         <th></th>
       </tr>
 
-      <% @devices.each do |character| %>
+      <% @devicesmapa.each do |character| %>
           <tr>
             <td><%= character.imei %></td>
             <td><%= character.name %></td>
@@ -37,6 +37,7 @@
 
     <br />
 
+<<<<<<< HEAD
 <%= gmaps4rails(@json) %>
 
 
@@ -50,6 +51,17 @@
                       "circles"    => { "data" => @circles_json }
               })
     %>
+=======
+<%#= gmaps4rails(@json) %>
+
+    <%= gmaps(
+                {
+                        "markers"     => { "data" => @json },
+
+                        "circles"     => { "data" => @jsonCirculos },
+                }
+        ) %>
+>>>>>>> d0d0b33d80181b384a9c3ce68b734027e6f36f79
 <% end %>
 
 
