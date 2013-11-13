@@ -4,6 +4,8 @@ class DevicesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:cuantos, :listamisdevices]
 
 
+
+
   # GET /devices
   # GET /devices.json
   def index
