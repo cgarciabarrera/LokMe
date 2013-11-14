@@ -22,7 +22,10 @@ gem 'thin'
 gem 'protected_attributes'
 
 gem 'newrelic_rpm'
-gem 'capistrano'
+gem "capistrano", "~> 2.13.4"
+gem 'rvm-capistrano'
+gem 'unicorn'
+
 
 gem 'pg'
 gem 'rails_12factor'
