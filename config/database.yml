@@ -1,0 +1,23 @@
+development:
+   adapter: mysql2
+   database: lokme_dev
+   username: root
+   password: Carlos01
+   server: localhost
+   timeout: 5000
+
+testing:
+   adapter: mysql2
+   database: lokme_test
+   username: root
+   password: Carlos01
+   server: localhost
+   timeout: 5000
+
+production:
+   adapter: mysql2
+   database: lokme
+   username: root
+   password: Lokme01
+   server: localhost
+   timeout: 5000
