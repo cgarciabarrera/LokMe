@@ -27,7 +27,7 @@ gem 'rvm-capistrano'
 gem 'unicorn'
 
 
-gem 'pg'
+#gem 'pg'
 gem 'rails_12factor'
 
 group :assets do
