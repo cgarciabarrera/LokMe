@@ -6,7 +6,7 @@
         <%=  User.find(device.user_id).name %><br>
     <% end %>
 
-    <%= device.name + " (" + device.imei.to_s + ")" %>
+    <%= device.name = nil ? "" : device.name %> <%= " (" + device.imei.to_s + ")" %>
     <% if @propio==1 %>
     <%= link_to 'Change name', edit_device_path(device) %> <%= link_to("Delete device", device_path(device), :data => { :confirm => "Are you sure?" }, :method => :delete)  %></td> </td>
     <% end %>

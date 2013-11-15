@@ -141,7 +141,8 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1.json
   def update
     respond_to do |format|
-      if @device.update(device_params)
+      @device.name = params[:device][:name]
+      if @device.save
         format.html { redirect_to @device, notice: 'Device was successfully updated.' }
         format.json { head :no_content }
       else
