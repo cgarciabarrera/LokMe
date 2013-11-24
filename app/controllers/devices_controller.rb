@@ -172,7 +172,7 @@ class DevicesController < ApplicationController
 
   def listamisdevices
     respond_to do |format|
-      format.json { render json: {:lista=>current_user.devices, :nombre=>current_user.name} }
+      format.json { render json: {:lista=>current_user.devices, :nombre=>current_user.name, :cuantos=>current_user.devices.count} }
 
     end
 
