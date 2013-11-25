@@ -23,6 +23,16 @@ class Device < ActiveRecord::Base
 
   end
 
+  def actualizado
+
+    ((Time.now - self.points.last.updated_at) *24*60*60).to_i
+
+  end
+
+  def username
+    self.user.name
+
+  end
 
   def gmaps4rails_infowindow
     if self.name.present?
