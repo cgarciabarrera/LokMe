@@ -3,7 +3,7 @@
 #listen "/tmp/.freeditorial_com_unicorn.sock"
 listen "/tmp/.lokme_lextrendlabs_com_unicorn.sock"
 
-worker_processes 4
+worker_processes 8
 
 APP_PATH = "/home/web/apps/"
 
