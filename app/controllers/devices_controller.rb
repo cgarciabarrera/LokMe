@@ -174,11 +174,13 @@ class DevicesController < ApplicationController
 
 
     respond_to do |format|
-      format.json { render json: {:lista=>current_user.devices.to_json(:methods => [:latitude, :longitude])} }
+      format.json { render json: {:lista=>current_user.devices.to_json(:methods => [:latitude, :longitude, :accuracy])} }
 
     end
 
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
