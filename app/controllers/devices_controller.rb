@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!, :only =>  [:listamisdevices]
   skip_before_filter :verify_authenticity_token, :only => [:cuantos, :listamisdevices]
 
 
@@ -171,8 +171,10 @@ class DevicesController < ApplicationController
   end
 
   def listamisdevices
+
+
     respond_to do |format|
-      format.json { render json: {:lista=>current_user.devices, :nombre=>current_user.name, :cuantos=>current_user.devices.count} }
+      format.json { render json: {:lista=>current_user.devices.to_json(:methods => [:latitude, :longitude])} }
 
     end
 
