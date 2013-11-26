@@ -19,6 +19,7 @@ LokMe::Application.routes.draw do
       post :share
       post :cuantos
       post :listamisdevices
+      post :adddeviceapi
 
     end
 

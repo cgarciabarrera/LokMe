@@ -3,7 +3,7 @@ class Device < ActiveRecord::Base
   acts_as_gmappable :process_geocoding => false
 
   has_many :points
-  validates :imei, :presence => true
+  validates :imei, :presence => true , :uniqueness => true
   belongs_to(:user)
 
   #attr_accessible :gmaps, :latitude, :longitude, :imei
@@ -25,8 +25,9 @@ class Device < ActiveRecord::Base
 
   def actualizado
 
+    if self.points.last.present?
     ((Time.now - self.points.last.updated_at) *24*60*60).to_i
-
+    end
   end
 
   def username

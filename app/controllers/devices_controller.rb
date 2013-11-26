@@ -1,7 +1,7 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, :only =>  [:listamisdevices]
-  skip_before_filter :verify_authenticity_token, :only => [:cuantos, :listamisdevices]
+  before_filter :authenticate_user!, :only =>  [:listamisdevices, :adddeviceapi]
+  skip_before_filter :verify_authenticity_token, :only => [:cuantos, :listamisdevices, :adddeviceapi]
 
 
 
@@ -176,6 +176,43 @@ class DevicesController < ApplicationController
     respond_to do |format|
       format.json { render json: {:lista=>current_user.devices.to_json(:methods => [:latitude, :longitude, :accuracy, :username, :actualizado])} }
 
+    end
+
+  end
+
+  def adddeviceapi
+
+    d=Device.find_by_imei(params[:imei])
+    unless d.present?
+      d=Device.new
+      d.imei = params[:imei]
+      d.name=""
+      if d.valid?
+        d.save
+      end
+    end
+
+    #ya le tenemos, nuevo o existente
+
+    if d.user_id.present?
+      #ver si es mio
+      if d.user_id==current_user.id
+        ##es mio, ya lo tenia, acabo
+        render :json => 'OK, ya era tuyo'
+        return true
+      else
+        #es de otro
+        render :json => 'KO'
+        return false
+
+      end
+    else
+      #no es de nadia, me lo asigno a miç
+      d.user_id=current_user.id
+      if d.valid?
+        render :json => 'OK, ahora ya es tuyo'
+        d.save
+      end
     end
 
   end
