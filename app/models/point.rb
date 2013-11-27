@@ -7,4 +7,7 @@ class Point < ActiveRecord::Base
 
   scope :ultimas2h, order("created_at desc").limit(60)
 
+
+  scope :ultimos200, order("updated_at desc").limit(200)
+
 end
