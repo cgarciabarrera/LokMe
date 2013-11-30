@@ -20,6 +20,9 @@ LokMe::Application.routes.draw do
       post :cuantos
       post :listamisdevices
       post :adddeviceapi
+      post :puntosdedevice
+      get :puntosdedevice
+
 
     end
 

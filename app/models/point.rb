@@ -10,4 +10,6 @@ class Point < ActiveRecord::Base
 
   scope :ultimos200, order("updated_at desc").limit(200)
 
+
+
 end

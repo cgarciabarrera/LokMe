@@ -224,6 +224,24 @@ class DevicesController < ApplicationController
   end
 
 
+  def puntosdedevice
+    device = Device.find_by_imei(params[:imei])
+    if device.present?
+      if device.user=current_user
+        if device.present?
+          @puntos = Point.where("device_id=?",device.id)
+          render :json => @puntos
+        else
+          render :json => "KO"
+        end
+      else
+        render :json => "KO user"
+      end
+    else
+      render :json => "KO device"
+    end
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
