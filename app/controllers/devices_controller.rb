@@ -229,7 +229,7 @@ class DevicesController < ApplicationController
     if device.present?
       if device.user=current_user
         if device.present?
-          @puntos = Point.where("device_id=?",device.id)
+          @puntos = Point.ultimos200.where("device_id=?",device.id)
           render :json => @puntos
         else
           render :json => "KO"
