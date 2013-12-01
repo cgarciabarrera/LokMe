@@ -1,7 +1,7 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :only =>  [:listamisdevices, :adddeviceapi]
-  skip_before_filter :verify_authenticity_token, :only => [:cuantos, :listamisdevices, :adddeviceapi, :puntosdedevice]
+  skip_before_filter :verify_authenticity_token, :only => [:cuantos, :listamisdevices, :adddeviceapi, :puntosdedevice, :listamisdevicesconcompartidos ]
 
 
 
