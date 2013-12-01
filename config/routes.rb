@@ -22,6 +22,7 @@ LokMe::Application.routes.draw do
       post :adddeviceapi
       post :puntosdedevice
       get :puntosdedevice
+      get :listamisdevicesconcompartidos
 
 
     end
