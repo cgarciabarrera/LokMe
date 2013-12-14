@@ -216,6 +216,11 @@ class DevicesController < ApplicationController
     if d.user_id.present?
       #ver si es mio
       if d.user_id==current_user.id
+        d.name=params[:name]
+        if d.valid?
+          d.save
+        end
+
         ##es mio, ya lo tenia, acabo
         render :json => {:respuesta => 'OK, ya era tuyo'}
         return true
@@ -228,9 +233,11 @@ class DevicesController < ApplicationController
     else
       #no es de nadia, me lo asigno a miç
       d.user_id=current_user.id
+      d.name=params[:name]
       if d.valid?
-        render :json => {:respuesta => 'OK, ahora ya es tuyo'}
         d.save
+        render :json => {:respuesta => 'OK, ahora ya es tuyo'}
+
       end
     end
 
