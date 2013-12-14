@@ -184,7 +184,8 @@ class DevicesController < ApplicationController
 
     respond_to do |format|
       @devicesmapa = Device.find_by_sql("select devices.*,users.name as usuario, '1' as propio from devices, users where devices.user_id = users.id and user_id = " + current_user.id.to_s + " union select devices.*, users.name as usuario, '0' as propio from devices, users where devices.user_id = users.id and devices.id in (select device_id from shareds where user_shared = " + current_user.id.to_s + ") ")
-      format.json { render json: {:lista=>@devicesmapa } }
+      format.json { render json: {:lista=>@devicesmapa.to_json(:methods => [:latitude, :longitude, :accuracy, :username, :actualizado])} }
+
 
 
     end
