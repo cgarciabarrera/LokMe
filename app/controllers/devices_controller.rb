@@ -174,7 +174,7 @@ class DevicesController < ApplicationController
 
 
     respond_to do |format|
-      format.json { render json: {:lista=>current_user.devices.to_json(:methods => [:latitude, :longitude, :accuracy, :username, :actualizado])} }
+      format.json { render json: {:lista=>current_user.devices.to_json(:methods => [:latitude, :longitude, :accuracy, :username, :actualizado], :propio=>"1" )} }
 
     end
 
