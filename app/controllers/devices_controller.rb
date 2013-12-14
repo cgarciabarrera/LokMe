@@ -197,16 +197,17 @@ class DevicesController < ApplicationController
     d=Device.find_by_imei(params[:imei])
     unless d.present?
 
-      render :json => {:respuesta => 'Aun no ha puntos de ese device'}
-      return false
+      #render :json => {:respuesta => 'Aun no ha puntos de ese device'}
+      #return false
 
       #si queremos agregarnos devices sin pountos, descomentar esto y comentar ariibe
-      #d=Device.new
-      #d.imei = params[:imei]
-      #d.name=""
-      #if d.valid?
-      #  d.save
-      #end
+      d=Device.new
+      d.imei = params[:imei]
+      d.name = params[:name]
+      if d.valid?
+        d.save
+        #render :json => {:respuesta => 'OK'}
+      end
 
     end
 
