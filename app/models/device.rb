@@ -48,5 +48,15 @@ class Device < ActiveRecord::Base
     "madrid"
   end
 
+  def notificar(titulop, titulolargo, descripcion)
+    require 'gcm'
+
+    gcm = GCM.new("AIzaSyBAWSWMc8agoh7ZI9KqNnA2CDcZZIfVZ5I")
+    registration_ids= [self.regid] # an array of one or more client registration IDs
+    options = {data: {titulopq: titulop, titulolargo: titulolargo, descripcion: descripcion}, collapse_key: "updated_score"}
+    response = gcm.send_notification(registration_ids, options)
+
+  end
+
 
 end

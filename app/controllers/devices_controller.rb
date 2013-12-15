@@ -261,15 +261,7 @@ class DevicesController < ApplicationController
   end
 
 
-  def notificar
-    require 'gcm'
 
-    gcm = GCM.new("AIzaSyBAWSWMc8agoh7ZI9KqNnA2CDcZZIfVZ5I")
-    registration_ids= ["APA91bF4JWTnvJwTpKWAv6a5GG-e_qic99fVEukkQHfYJxXB2SgMXLBTsdKiWFwWjuz7UcRYi3SOp7yGkf7Su8oeHffiZcqPHJhv2CIQnrT-dtk6Sl4GaU-7K7MfuRVZZ93OaMG2M2rYDAFJAhaolNhKRQXerm8w7A"] # an array of one or more client registration IDs
-    options = {data: {score: "123"}, collapse_key: "updated_score"}
-    response = gcm.send_notification(registration_ids, options)
-    render :json => {:gdm_dice => response}
-  end
 
 
   def puntosdedevice
