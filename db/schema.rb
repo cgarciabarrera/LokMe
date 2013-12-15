@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215212348) do
+ActiveRecord::Schema.define(version: 20131215213050) do
+
+  create_table "alarms", force: true do |t|
+    t.integer  "device1"
+    t.integer  "device2"
+    t.boolean  "closer",      default: true
+    t.integer  "distance"
+    t.string   "tipo"
+    t.boolean  "activa",      default: true
+    t.boolean  "in_progress", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "devices", force: true do |t|
     t.string   "imei"
