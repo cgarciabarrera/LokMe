@@ -194,15 +194,17 @@ class DevicesController < ApplicationController
   end
 
 
-  def addRegID
+  def addregid
 
     d=Device.find_by_imei(params[:imei])
-    d.regid = params[:regid]
-    if d.valid?
-      d.save
-      render :json => {:respuesta => 'OK'}
-    else
-      render :json => {:respuesta => 'KO'}
+    if d.user = current_user
+      d.regid = params[:regid]
+      if d.valid?
+        d.save
+        render :json => {:respuesta => 'OK'}
+      else
+        render :json => {:respuesta => 'KO'}
+      end
     end
 
   end
