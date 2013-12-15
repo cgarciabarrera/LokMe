@@ -193,6 +193,20 @@ class DevicesController < ApplicationController
 
   end
 
+
+  def addRegID
+
+    d=Device.find_by_imei(params[:imei])
+    d.regid = params[:regid]
+    if d.valid?
+      d.save
+      render :json => {:respuesta => 'OK'}
+    else
+      render :json => {:respuesta => 'KO'}
+    end
+
+  end
+
   def adddeviceapi
 
     d=Device.find_by_imei(params[:imei])

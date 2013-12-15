@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104222835) do
+ActiveRecord::Schema.define(version: 20131215103233) do
 
   create_table "devices", force: true do |t|
     t.string   "imei"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20131104222835) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "gmaps"
+    t.string   "regid"
   end
 
   add_index "devices", ["imei"], name: "index_devices_on_imei", using: :btree
