@@ -1,7 +1,7 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :only =>  [:listamisdevices, :adddeviceapi]
-  skip_before_filter :verify_authenticity_token, :only => [:addregid, :cuantos, :listamisdevices, :adddeviceapi, :puntosdedevice, :listamisdevicesconcompartidos ]
+  skip_before_filter :verify_authenticity_token, :only => [:notificar, :addregid, :cuantos, :listamisdevices, :adddeviceapi, :puntosdedevice, :listamisdevicesconcompartidos ]
 
 
 
@@ -258,6 +258,17 @@ class DevicesController < ApplicationController
       end
     end
 
+  end
+
+
+  def notificar
+    require 'gcm'
+
+    gcm = GCM.new("AIzaSyBAWSWMc8agoh7ZI9KqNnA2CDcZZIfVZ5I")
+    registration_ids= ["APA91bF4JWTnvJwTpKWAv6a5GG-e_qic99fVEukkQHfYJxXB2SgMXLBTsdKiWFwWjuz7UcRYi3SOp7yGkf7Su8oeHffiZcqPHJhv2CIQnrT-dtk6Sl4GaU-7K7MfuRVZZ93OaMG2M2rYDAFJAhaolNhKRQXerm8w7A"] # an array of one or more client registration IDs
+    options = {data: {score: "123"}, collapse_key: "updated_score"}
+    response = gcm.send_notification(registration_ids, options)
+    render :json => {:gdm_dice => response}
   end
 
 
