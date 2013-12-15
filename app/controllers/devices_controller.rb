@@ -251,6 +251,7 @@ class DevicesController < ApplicationController
       #no es de nadia, me lo asigno a miç
       d.user_id=current_user.id
       d.name=params[:name]
+      d.imei = params[:imei]
       if d.valid?
         d.save
         render :json => {:respuesta => 'OK, ahora ya es tuyo'}
