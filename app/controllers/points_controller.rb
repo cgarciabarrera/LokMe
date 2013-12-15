@@ -72,8 +72,14 @@ class PointsController < ApplicationController
 
       if b.alarms?
         p "llego aqui"
-        a=Alarm.where("device1 = ?", b.id)
 
+        ##verificar que tienes alarmas
+
+        a=Alarm.where("device1 = ?", b.id)
+        if a.count=0
+          b.alarms=false
+          b.save
+        end
         a.each do |alarm|
           if alarm.tipo=="1"
             dev2 = Device.find(alarm.device2)
