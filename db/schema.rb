@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215103233) do
+ActiveRecord::Schema.define(version: 20131215212348) do
 
   create_table "devices", force: true do |t|
     t.string   "imei"
-    t.string   "name",                 default: ""
+    t.string   "name",       default: ""
     t.datetime "last_seen"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "authentication_token"
     t.boolean  "gmaps"
     t.string   "regid"
+    t.boolean  "alarms",     default: false
   end
 
   add_index "devices", ["imei"], name: "index_devices_on_imei", using: :btree
