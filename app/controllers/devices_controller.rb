@@ -255,6 +255,8 @@ class DevicesController < ApplicationController
         d.save
         render :json => {:respuesta => 'OK, ahora ya es tuyo'}
 
+      else
+        render :json => {:respuesta => 'KO.' + d.errors.to_a}
       end
     end
 
