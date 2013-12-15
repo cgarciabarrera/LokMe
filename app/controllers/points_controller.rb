@@ -76,7 +76,7 @@ class PointsController < ApplicationController
         ##verificar que tienes alarmas
 
         a=Alarm.where("device1 = ?", b.id)
-        if a.count=0
+        if a.count==0
           b.alarms=false
           b.save
         end
