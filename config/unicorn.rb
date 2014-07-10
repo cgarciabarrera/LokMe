@@ -3,7 +3,7 @@
 #listen "/tmp/.freeditorial_com_unicorn.sock"
 listen "/tmp/.lokusapp_production_com_unicorn.sock"
 
-worker_processes 8
+worker_processes 4
 
 APP_PATH = "/home/web/apps/"
 

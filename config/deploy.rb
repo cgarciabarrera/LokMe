@@ -22,27 +22,6 @@ begin
   case targetname
 
 
-    when 'staging' then
-
-      # Prompt to make really sure we want to deploy into prouction
-      puts "\n\e[0;31m   ######################################################################"
-      puts "   #\n   #       Estas seguro de querer hacer un deploy a STAGING ?"
-      puts "   #\n   #               Introduzca y/N + o intro para continuar\n   #"
-      puts "   ######################################################################\e[0m\n"
-      proceed = STDIN.gets[0..0] rescue nil
-      exit unless proceed == 'y' || proceed == 'Y'
-
-      #set :rvm_ruby_string, 'ruby-1.9.2-p180@fundspeople'
-      set :application, "lokme.lextrendlabs.com"
-      set :deploy_to, "/home/#{user}/apps/#{application}"
-      role :app, "198.27.88.66"
-      role :web, "198.27.88.66"
-      role :db,  "198.27.88.66", :primary => true
-      set :rails_env, "staging"
-
-      set :branch, "staging"
-      set :bundle_without, [:development]
-
     when 'production' then
       # Prompt to make really sure we want to deploy into prouction
       puts "\n\e[0;31m   ######################################################################"
