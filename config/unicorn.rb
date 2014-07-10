@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 
 #listen "/tmp/.freeditorial_com_unicorn.sock"
-listen "/tmp/.lokusapp_com_unicorn.sock"
+listen "/tmp/.lokusapp_production_com_unicorn.sock"
 
 worker_processes 8
 
