@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 
 #listen "/tmp/.freeditorial_com_unicorn.sock"
-listen "/tmp/.lokme_lextrendlabs_com_unicorn.sock"
+listen "/tmp/.lokusapp_com_unicorn.sock"
 
 worker_processes 8
 
@@ -12,7 +12,7 @@ if ENV['RAILS_ENV'] == 'staging'
   Dir = "lokme.lextrendlabs.com/"
 else
   timeOut = 4000
-  Dir = "www.xxx.com/"
+  Dir = "www.lokusapp.com/"
 end
 
 working_directory APP_PATH + Dir + "current/"
