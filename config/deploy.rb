@@ -20,18 +20,7 @@ default_run_options[:pty] = true
 
 begin
   case targetname
-    when 'development' then
-#      set :rvm_ruby_string, 'ruby-1.9.2-p290'
-      set :user, "freeditorial"
-      set :deploy_to, "/home/#{user}/development/app"
-      set :application, "freeditorialDev"
-      role :app, "172.26.0.6"
-      role :web, "172.26.0.6"
-      role :db,  "172.26.0.6", :primary => true
-      set :rails_env, "development"
-      set :branch, "master"
-      set :bundle_without, [:development]
-      set :rvm, 1
+
 
     when 'staging' then
 
@@ -63,11 +52,11 @@ begin
       exit unless proceed == 'y' || proceed == 'Y'
 
       #set :rvm_ruby_string, 'ruby-1.9.2-p180@fundspeople'
-      set :application, "www.lokme.com"
+      set :application, "www.lokusapp.com"
       set :deploy_to, "/home/web/apps/#{application}"
-      role :app, "178.33.180x.98"
-      role :web, "178.33.180x.98"
-      role :db,  "178.33.180x.98", :primary => true
+      role :app, "www.lokusapp.com"
+      role :web, "www.lokusapp.com"
+      role :db,  "www.lokusapp.com", :primary => true
       set :rails_env, "production"
       set :branch, "production"
 
