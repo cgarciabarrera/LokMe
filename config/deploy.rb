@@ -39,6 +39,7 @@ begin
       role :web, "198.27.88.66"
       role :db,  "198.27.88.66", :primary => true
       set :rails_env, "staging"
+
       set :branch, "staging"
       set :bundle_without, [:development]
 
