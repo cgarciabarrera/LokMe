@@ -77,6 +77,20 @@ GEM
     gcm (0.0.4)
       httparty
       json
+    geo-distance (0.2.0)
+      geo_point (~> 0.2.5)
+      geo_units (~> 0.2.4.1)
+    geo_calc (0.7.6)
+      activesupport (>= 3.0.1)
+      geo_units (~> 0.2.1)
+      i18n
+      require_all (~> 1.2.0)
+      sugar-high (~> 0.4.6.3)
+    geo_point (0.2.5)
+      geo_calc (~> 0.7.5)
+      geo_units (~> 0.2.1)
+    geo_units (0.2.4.1)
+      sugar-high (~> 0.4.6.2)
     gmaps4rails (1.5.6)
     highline (1.6.20)
     hike (1.2.3)
@@ -142,6 +156,7 @@ GEM
     raindrops (0.12.0)
     rake (10.1.0)
     ref (1.0.5)
+    require_all (1.2.1)
     rolify (3.2.0)
     rspec-core (2.14.5)
     rspec-expectations (2.14.3)
@@ -170,6 +185,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sugar-high (0.4.6.4)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -212,6 +228,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   gcm
+  geo-distance
   gmaps4rails (= 1.5.6)
   jbuilder (~> 1.2)
   jquery-rails

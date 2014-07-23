@@ -28,6 +28,7 @@ gem 'unicorn'
 
 gem 'gcm'
 
+gem 'geo-distance'
 #gem 'pg'
 gem 'rails_12factor'
 

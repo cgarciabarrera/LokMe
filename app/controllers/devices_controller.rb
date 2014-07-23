@@ -155,6 +155,13 @@ class DevicesController < ApplicationController
   # DELETE /devices/1
   # DELETE /devices/1.json
   def destroy
+    #ver si hay alarmas suyas o que alguien ytenga con el
+    @misalarmas = Alarm.where("device1= ?", @device.id)
+    @misalarmas.destroy_all
+
+    @susalarmas = Alarm.where("device2= ?", @device.id)
+    @susalarmas.destroy_all
+
     @device.destroy
     respond_to do |format|
       format.html { redirect_to devices_url }

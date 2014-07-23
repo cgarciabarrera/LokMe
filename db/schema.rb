@@ -11,18 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215103233) do
+ActiveRecord::Schema.define(version: 20131215213050) do
+
+  create_table "alarms", force: true do |t|
+    t.integer  "device1"
+    t.integer  "device2"
+    t.boolean  "closer",      default: true
+    t.integer  "distance"
+    t.string   "tipo"
+    t.boolean  "activa",      default: true
+    t.boolean  "in_progress", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "devices", force: true do |t|
     t.string   "imei"
-    t.string   "name",                 default: ""
+    t.string   "name",       default: ""
     t.datetime "last_seen"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "authentication_token"
     t.boolean  "gmaps"
     t.string   "regid"
+    t.boolean  "alarms",     default: false
   end
 
   add_index "devices", ["imei"], name: "index_devices_on_imei", using: :btree

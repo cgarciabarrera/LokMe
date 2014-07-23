@@ -3,6 +3,8 @@ class PointsController < ApplicationController
   before_filter :authenticate_user!, :except =>  [:manual]
   skip_before_filter :verify_authenticity_token, :only => [:manual]
 
+
+
   # GET /points
   # GET /points.json
   def index
@@ -11,6 +13,10 @@ class PointsController < ApplicationController
 
 
   def manual
+
+    require 'geo-distance'
+
+
     latitude=params[:latitude]
     longitude=params[:longitude]
     accuracy = params[:accuracy]
@@ -52,6 +58,7 @@ class PointsController < ApplicationController
       end
       a.save
       id_device = a.id
+      b=a
 
     end
 
@@ -60,6 +67,64 @@ class PointsController < ApplicationController
 
     if pointnew.valid?
       pointnew.save
+
+      #alarmas
+
+      if b.alarms?
+        p "llego aqui"
+
+        ##verificar que tienes alarmas
+
+        a=Alarm.where("device1 = ?", b.id)
+        if a.count==0
+          b.alarms=false
+          b.save
+        end
+        a.each do |alarm|
+          if alarm.tipo=="1"
+            dev2 = Device.find(alarm.device2)
+
+            dist = GeoDistance::Haversine.geo_distance(params[:latitude], params[:longitude], dev2.latitude, dev2.longitude).to_meters
+            p dist.to_s + " metros"
+            if alarm.closer?
+              if alarm.distance > dist
+                p "se cumple"
+                unless alarm.in_progress?
+                  b.notificar("Alquien cerca",dev2.name + " de " + dev2.user.name + " se acerca", "Distancia: " + dist.to_s)
+                  p "notifico al device"
+                  alarm.in_progress=true
+                  alarm.save
+                end
+              else
+                p "no se cimple"
+                alarm.in_progress=false
+                alarm.save
+              end
+            else
+
+              if dist > alarm.distance
+                p "se cumple"
+                unless alarm.in_progress?
+                  b.notificar("Alquien se aleja",dev2.name + " de " + dev2.user.name + " se aleja", "Distancia: " + dist.to_s)
+                  p "notifico"
+                  alarm.in_progress=true
+                  alarm.save
+                end
+              else
+                p "no se cumple"
+                alarm.in_progress=false
+                alarm.save
+              end
+            end
+          end
+        end
+
+
+
+      end
+
+
+
       render :json =>  'OK'
     else
       render :json => 'KO'
