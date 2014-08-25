@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
   has_many(:devices)
 
+  has_many :shareds
+
   attr_accessible :username, :name, :email, :password, :password_confirmation, :remember_me, :locker_attributes
 
 end
